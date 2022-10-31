@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0 (Python 3.9.6 on win32)" generated="20221031 10:24:30.923" rpa="false" schemaversion="3">
+<suite id="s1" name="wokAutomation" source="C:\CEZ\wokAutomation">
+<suite id="s1-s1" name="SpringMigrationRecources" source="C:\CEZ\wokAutomation\SpringMigrationRecources.robot">
+<test id="s1-s1-t1" name="Get_depraceted_spring_properties" line="14">
+<kw name="Open_browser_on_url">
+<arg>https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.7.0-Configuration-Changelog</arg>
+<doc>Opens browser on given url</doc>
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${url}</arg>
+<arg>Chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20221031 10:24:31.207" level="INFO">Opening browser 'Chrome' to base url 'https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.7.0-Configuration-Changelog'.</msg>
+<status status="PASS" starttime="20221031 10:24:31.207" endtime="20221031 10:24:33.947"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20221031 10:24:33.947" endtime="20221031 10:24:34.090"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:31.206" endtime="20221031 10:24:34.090"/>
+</kw>
+<kw name="Get_table_column_values">
+<var>@{list}</var>
+<arg>//*[@id="wiki-body"]/div/div[2]/div/table</arg>
+<doc>Get values from given table on page</doc>
+<kw name="Get WebElements" library="SeleniumLibrary">
+<var>@{column_values}</var>
+<arg>${table_path}/tbody/tr/td[1]/p/code</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<msg timestamp="20221031 10:24:34.124" level="INFO">@{column_values} = [ &lt;selenium.webdriver.remote.webelement.WebElement (session="2ad29d3237fdef4fe46fbf1c36d01607", element="26934343-e693-45c2-a0da-52da2a948839")&gt; | &lt;selenium.webdriver.remote.webelement.WebElement (ses...</msg>
+<status status="PASS" starttime="20221031 10:24:34.092" endtime="20221031 10:24:34.124"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>@{values_list}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20221031 10:24:34.124" level="INFO">@{values_list} = [ ]</msg>
+<status status="PASS" starttime="20221031 10:24:34.124" endtime="20221031 10:24:34.125"/>
+</kw>
+<for flavor="IN">
+<var>${value}</var>
+<value>@{column_values}</value>
+<iter>
+<var name="${value}">&lt;selenium.webdriver.remote.webelement.WebElement (session="2ad29d3237fdef4fe46fbf1c36d01607", element="26934343-e693-45c2-a0da-52da2a948839")&gt;</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${value}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221031 10:24:34.151" level="INFO">${text} = spring.mustache.allow-request-override</msg>
+<status status="PASS" starttime="20221031 10:24:34.125" endtime="20221031 10:24:34.151"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${values_list}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20221031 10:24:34.151" endtime="20221031 10:24:34.152"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.125" endtime="20221031 10:24:34.152"/>
+</iter>
+<iter>
+<var name="${value}">&lt;selenium.webdriver.remote.webelement.WebElement (session="2ad29d3237fdef4fe46fbf1c36d01607", element="1671fb27-a544-4191-a060-ca34a3ba8cf9")&gt;</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${value}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221031 10:24:34.239" level="INFO">${text} = spring.mustache.allow-session-override</msg>
+<status status="PASS" starttime="20221031 10:24:34.152" endtime="20221031 10:24:34.240"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${values_list}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20221031 10:24:34.240" endtime="20221031 10:24:34.240"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.152" endtime="20221031 10:24:34.240"/>
+</iter>
+<iter>
+<var name="${value}">&lt;selenium.webdriver.remote.webelement.WebElement (session="2ad29d3237fdef4fe46fbf1c36d01607", element="83041fa0-5720-4760-b65d-036c3e260634")&gt;</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${value}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221031 10:24:34.279" level="INFO">${text} = spring.mustache.cache</msg>
+<status status="PASS" starttime="20221031 10:24:34.241" endtime="20221031 10:24:34.279"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${values_list}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20221031 10:24:34.279" endtime="20221031 10:24:34.280"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.241" endtime="20221031 10:24:34.280"/>
+</iter>
+<iter>
+<var name="${value}">&lt;selenium.webdriver.remote.webelement.WebElement (session="2ad29d3237fdef4fe46fbf1c36d01607", element="59d692bc-34d0-4973-9c62-899b5d1aaea3")&gt;</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${value}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221031 10:24:34.311" level="INFO">${text} = spring.mustache.content-type</msg>
+<status status="PASS" starttime="20221031 10:24:34.280" endtime="20221031 10:24:34.313"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${values_list}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20221031 10:24:34.313" endtime="20221031 10:24:34.313"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.280" endtime="20221031 10:24:34.313"/>
+</iter>
+<iter>
+<var name="${value}">&lt;selenium.webdriver.remote.webelement.WebElement (session="2ad29d3237fdef4fe46fbf1c36d01607", element="68eb340f-7fa3-4986-a8c4-2c3a7d20a89e")&gt;</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${value}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221031 10:24:34.344" level="INFO">${text} = spring.mustache.expose-request-attributes</msg>
+<status status="PASS" starttime="20221031 10:24:34.313" endtime="20221031 10:24:34.344"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${values_list}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20221031 10:24:34.344" endtime="20221031 10:24:34.345"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.313" endtime="20221031 10:24:34.345"/>
+</iter>
+<iter>
+<var name="${value}">&lt;selenium.webdriver.remote.webelement.WebElement (session="2ad29d3237fdef4fe46fbf1c36d01607", element="fde8c76f-dc11-41cc-995b-ea6ad2621bc9")&gt;</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${value}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221031 10:24:34.369" level="INFO">${text} = spring.mustache.expose-session-attributes</msg>
+<status status="PASS" starttime="20221031 10:24:34.345" endtime="20221031 10:24:34.369"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${values_list}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20221031 10:24:34.370" endtime="20221031 10:24:34.370"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.345" endtime="20221031 10:24:34.370"/>
+</iter>
+<iter>
+<var name="${value}">&lt;selenium.webdriver.remote.webelement.WebElement (session="2ad29d3237fdef4fe46fbf1c36d01607", element="8daa906c-4e2c-4cd5-b204-85f72597d9f6")&gt;</var>
+<kw name="Get Text" library="SeleniumLibrary">
+<var>${text}</var>
+<arg>${value}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<msg timestamp="20221031 10:24:34.393" level="INFO">${text} = spring.mustache.expose-spring-macro-helpers</msg>
+<status status="PASS" starttime="20221031 10:24:34.371" endtime="20221031 10:24:34.394"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${values_list}</arg>
+<arg>${text}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20221031 10:24:34.394" endtime="20221031 10:24:34.395"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.370" endtime="20221031 10:24:34.395"/>
+</iter>
+<status status="PASS" starttime="20221031 10:24:34.125" endtime="20221031 10:24:34.395"/>
+</for>
+<msg timestamp="20221031 10:24:34.395" level="INFO">@{list} = [ spring.mustache.allow-request-override | spring.mustache.allow-session-override | spring.mustache.cache | spring.mustache.content-type | spring.mustache.expose-request-attributes | spring.mustache.e...</msg>
+<status status="PASS" starttime="20221031 10:24:34.091" endtime="20221031 10:24:34.395"/>
+</kw>
+<kw name="Write_list_on_console">
+<arg>@{list}</arg>
+<doc>Write list on console output</doc>
+<for flavor="IN">
+<var>${element}</var>
+<value>@{list}</value>
+<iter>
+<var name="${element}">spring.mustache.allow-request-override</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${element}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221031 10:24:34.396" endtime="20221031 10:24:34.397"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.396" endtime="20221031 10:24:34.397"/>
+</iter>
+<iter>
+<var name="${element}">spring.mustache.allow-session-override</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${element}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221031 10:24:34.397" endtime="20221031 10:24:34.398"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.397" endtime="20221031 10:24:34.398"/>
+</iter>
+<iter>
+<var name="${element}">spring.mustache.cache</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${element}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221031 10:24:34.398" endtime="20221031 10:24:34.399"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.398" endtime="20221031 10:24:34.399"/>
+</iter>
+<iter>
+<var name="${element}">spring.mustache.content-type</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${element}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221031 10:24:34.399" endtime="20221031 10:24:34.399"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.399" endtime="20221031 10:24:34.399"/>
+</iter>
+<iter>
+<var name="${element}">spring.mustache.expose-request-attributes</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${element}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221031 10:24:34.400" endtime="20221031 10:24:34.400"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.399" endtime="20221031 10:24:34.400"/>
+</iter>
+<iter>
+<var name="${element}">spring.mustache.expose-session-attributes</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${element}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221031 10:24:34.400" endtime="20221031 10:24:34.401"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.400" endtime="20221031 10:24:34.401"/>
+</iter>
+<iter>
+<var name="${element}">spring.mustache.expose-spring-macro-helpers</var>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${element}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20221031 10:24:34.401" endtime="20221031 10:24:34.401"/>
+</kw>
+<status status="PASS" starttime="20221031 10:24:34.401" endtime="20221031 10:24:34.401"/>
+</iter>
+<status status="PASS" starttime="20221031 10:24:34.396" endtime="20221031 10:24:34.401"/>
+</for>
+<status status="PASS" starttime="20221031 10:24:34.396" endtime="20221031 10:24:34.401"/>
+</kw>
+<kw name="Close All Browsers" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20221031 10:24:34.403" endtime="20221031 10:24:36.569"/>
+</kw>
+<doc>Get depraceted sprinmg properties for version 2.7.0</doc>
+<status status="PASS" starttime="20221031 10:24:31.206" endtime="20221031 10:24:36.570"/>
+</test>
+<status status="PASS" starttime="20221031 10:24:30.974" endtime="20221031 10:24:36.572"/>
+</suite>
+<status status="PASS" starttime="20221031 10:24:30.927" endtime="20221031 10:24:36.575"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="wokAutomation">wokAutomation</stat>
+<stat pass="1" fail="0" skip="0" id="s1-s1" name="SpringMigrationRecources">wokAutomation.SpringMigrationRecources</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
