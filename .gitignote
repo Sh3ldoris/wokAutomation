@@ -3,6 +3,7 @@ target/
 out/
 tmp/
 log/
+*.data/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
