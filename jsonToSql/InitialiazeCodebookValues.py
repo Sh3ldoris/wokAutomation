@@ -5,7 +5,7 @@ def main():
     jsrot_data: dict = __open_file_and_get_data('../data/AuditLogConfigurationJsrot.json')
     servio_data: dict = __open_file_and_get_data('../data/AuditLogConfigurationServio.json')
 
-    sql_file.write('MERGE WF_CODEBOOK_VALUE v\nUSING (\n\tselect *\n\tfrom (values\n\t')
+    sql_file.write('MERGE WF_CODEBOOK_VALUE v\nUSING (\n\tselect *\n\tfrom (values\n\t\t')
 
     methods: list = jsrot_data['methods']
     exceptions: list = jsrot_data['exceptions']
@@ -14,12 +14,12 @@ def main():
 
     for i in range(method_length):
         method: dict = methods[i]
-        sql_file.write('(\'AUDIT_CONFIG\', \'' + method['code'] + '\', \'' + method['msg'] + '\', \'')
+        sql_file.write('(\'AUDIT_CONFIG\', \'' + method['key'] + '\', \'' + method['msg'] + '\', \'')
         sql_file.write(__create_attribute_json() + '\', 1),\n\t\t')
 
     for i in range(exception_length):
-        method: dict = methods[i]
-        sql_file.write('(\'AUDIT_CONFIG\', \'' + method['code'] + '\', \'Výjimka\', \'')
+        method: dict = exceptions[i]
+        sql_file.write('(\'AUDIT_CONFIG\', \'' + method['key'] + '\', \'Výjimka\', \'')
         sql_file.write(__create_attribute_json() + '\', 1),\n\t\t')
 
     methods = servio_data['methods']
@@ -27,12 +27,21 @@ def main():
 
     for i in range(method_length):
         method: dict = methods[i]
-        sql_file.write('(\'AUDIT_CONFIG\', \'' + method['code'] + '\', \'' + method['msg'] + '\', \'')
+        sql_file.write('(\'AUDIT_CONFIG\', \'' + method['key'] + '\', \'' + method['msg'] + '\', \'')
         sql_file.write(__create_attribute_json(servio=True) + '\', 1)')
-        sql_file.write(',\n\t\t') if i < method_length - 1 else sql_file.write('\n\t\t')
+        sql_file.write(',\n\t\t') if i < method_length - 1 else sql_file.write('\n\t\t\t')
+
+    entities: list = servio_data['entities']
+    entities_length: int = len(entities)
+
+    for i in range(entities_length):
+        method: dict = entities[i]
+        sql_file.write('(\'AUDIT_CONFIG\', \'' + method['key'] + '\', \'\', \'')
+        sql_file.write(__create_attribute_json(servio=True) + '\', 1)')
+        sql_file.write(',\n\t\t') if i < method_length - 1 else sql_file.write('\n\t\t\t')
 
 
-    sql_file.write(') newPlo (codebook_id, code, c_value, extra_values, valid)\n)n\n')
+    sql_file.write(') newPlo (codebook_id, code, c_value, extra_values, valid)\n) n\n')
     sql_file.write('ON (v.CODEBOOK_ID = n.CODEBOOK_ID and v.CODE = n.CODE)\n')
     sql_file.write('WHEN MATCHED THEN\n\tUPDATE\n\tSET c_value = n.c_value, extra_values = n.extra_values\n')
     sql_file.write('WHEN NOT MATCHED BY TARGET THEN\n\t')
