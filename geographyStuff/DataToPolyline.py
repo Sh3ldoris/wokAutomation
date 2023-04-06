@@ -9,7 +9,7 @@ with open(input_filename, "r") as input_file, open(output_filename, "w") as outp
     csv_reader = csv.reader(input_file, delimiter="\t")
 
     query = """
-MERGE INTO WF_CODEBOOK_VALUE v
+MERGE INTO WF_LAST_MILE v
 USING (
     select ID, POLYLINE
         from (values
@@ -25,7 +25,7 @@ USING (
         # Encode the coordinates into a polyline string
         polyline_string = polyline.encode(coordinates)
         # Write the ID and encoded polyline string to the output file
-        query += ("\t\t\t({}, {}),\n".format(id, polyline_string))
+        query += ("\t\t\t({}, '{}'),\n".format(id, polyline_string))
 
     query += """
     ) newPolyline (ID, POLYLINE)
@@ -33,8 +33,7 @@ USING (
 ON (v.ID = n.ID)
 WHEN MATCHED THEN
     UPDATE
-        SET POLYLINE = n.POLYLINE
-WHEN NOT MATCHED THEN
+        SET POLYLINE = n.POLYLINE;
 """
     output_file.write(query)
 
